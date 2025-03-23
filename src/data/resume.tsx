@@ -1,6 +1,18 @@
 import { Icons } from "@/components/icons";
 import { HomeIcon, NotebookIcon } from "lucide-react";
 
+interface Project {
+  title: string;
+  href: string;
+  dates: string;
+  active: boolean;
+  description: string;
+  technologies: string[];
+  links: { type: string; href: string; icon: JSX.Element }[];
+  image: string;  // or it could be optional if you may have projects without images
+  video?: string;  // This will be optional
+}
+
 export const DATA = {
   name: "Saiyam Gupta",
   initials: "SG",
@@ -251,8 +263,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video:
-        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      video: "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
     {
       title: "3D website using ReatJS",
