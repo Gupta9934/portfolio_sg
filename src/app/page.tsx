@@ -239,7 +239,7 @@ export default function Page() {
               </p>
 
               <h4 className="italic mt-8 mx-auto max-w-[600px] text-muted-foreground">
-                "Every project is a journey. Let's create something extraordinary that speaks for itself"
+                &ldquo;Every project is a journey. Let&rsquo;s create something extraordinary that speaks for itself&rdquo;
               </h4>
 
             </div>
