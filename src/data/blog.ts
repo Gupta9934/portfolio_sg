@@ -15,7 +15,12 @@ type Metadata = {
 };
 
 function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
+  try {
+    return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
+  } catch (error) {
+    console.error("Error reading MDX directory:", error);
+    return [];
+  }
 }
 
 export async function markdownToHTML(markdown: string) {
@@ -37,30 +42,48 @@ export async function markdownToHTML(markdown: string) {
 }
 
 export async function getPost(slug: string) {
-  const filePath = path.join("content", `${slug}.mdx`);
-  let source = fs.readFileSync(filePath, "utf-8");
-  const { content: rawContent, data: metadata } = matter(source);
-  const content = await markdownToHTML(rawContent);
-  return {
-    source: content,
-    metadata,
-    slug,
-  };
+  try {
+    const filePath = path.join(process.cwd(), "content", `${slug}.mdx`);
+    let source = fs.readFileSync(filePath, "utf-8");
+    const { content: rawContent, data: metadata } = matter(source);
+    const content = await markdownToHTML(rawContent);
+    return {
+      source: content,
+      metadata,
+      slug,
+    };
+  } catch (error) {
+    console.error(`Error reading post ${slug}:`, error);
+    return {
+      source: "",
+      metadata: {
+        title: "Post not found",
+        publishedAt: new Date().toISOString(),
+        summary: "This post could not be loaded.",
+      },
+      slug,
+    };
+  }
 }
 
 async function getAllPosts(dir: string) {
-  let mdxFiles = getMDXFiles(dir);
-  return Promise.all(
-    mdxFiles.map(async (file) => {
-      let slug = path.basename(file, path.extname(file));
-      let { metadata, source } = await getPost(slug);
-      return {
-        metadata,
-        slug,
-        source,
-      };
-    })
-  );
+  try {
+    let mdxFiles = getMDXFiles(dir);
+    return Promise.all(
+      mdxFiles.map(async (file) => {
+        let slug = path.basename(file, path.extname(file));
+        let { metadata, source } = await getPost(slug);
+        return {
+          metadata,
+          slug,
+          source,
+        };
+      })
+    );
+  } catch (error) {
+    console.error("Error getting all posts:", error);
+    return [];
+  }
 }
 
 export async function getBlogPosts() {
