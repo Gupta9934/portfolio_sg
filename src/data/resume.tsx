@@ -4,12 +4,12 @@ import { HomeIcon, NotebookIcon } from "lucide-react";
 export const DATA = {
   name: "Saiyam Gupta",
   initials: "SG",
-  url: "https://saiyam-porfolio.vercel.app",
+  url: "https://portfolio-3l8lc1ao8-gupta9934s-projects.vercel.app/",
   location: "Bengaluru, INDIA",
-  locationLink: "https://www.google.com/maps/place/sanfrancisco",
+  locationLink: "https://www.google.com/maps/place/bengaluru",
   "description": "Software Engineer. I love building things and helping people. Very active on LinkedIn.",
   summary: `
-  • Results-driven IT professional with a Bachelor's in Technology and a track record of academic excellence (86.3).
+  • Results-driven IT professional with a Bachelor's in Technology and a track record of academic excellence.
    
   • Skilled in JAVA, Python, AI/ML, and Backend development (DSA, OOPs). Proven success developing high-end models and architecture & model analysis time and enhancing workflow efficiency.
    
@@ -47,7 +47,7 @@ export const DATA = {
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "www.linkedin.com/in/saiyam9934",
+        url: "https://www.linkedin.com/in/saiyam9934/",
         icon: Icons.linkedin,
         navbar: true,
       },
